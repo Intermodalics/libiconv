@@ -13,15 +13,15 @@ all : configures include/localcharset.h.build.in
 
 autoconf/aclocal.m4 : $(wildcard m4/*.m4)
 	test -d autoconf || mkdir autoconf
-	$(ACLOCAL) -I m4 --output=$@ && rm -rf autom4te.cache
+	$(ACLOCAL) -I m4 --output=$@
 
 configures : configure config.h.in
 
 configure : configure.ac autoconf/aclocal.m4
-	$(AUTOCONF) --include autoconf && rm -rf autom4te.cache
+	$(AUTOCONF) --include autoconf
 
 config.h.in : configure.ac autoconf/aclocal.m4
-	$(AUTOHEADER) --include autoconf && rm -rf autom4te.cache
+	$(AUTOHEADER) --include autoconf
 	touch config.h.in
 
 include/localcharset.h.build.in : include/localcharset.h.in include/export.h

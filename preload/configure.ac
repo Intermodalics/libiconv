@@ -1,4 +1,4 @@
-dnl Copyright (C) 1999-2009, 2016-2017 Free Software Foundation, Inc.
+dnl Copyright (C) 1999-2009, 2016 Free Software Foundation, Inc.
 dnl This file is part of the GNU LIBICONV Library.
 dnl
 dnl The GNU LIBICONV Library is free software; you can redistribute it and/or
@@ -52,32 +52,20 @@ dnl           check for build configuration
 
 dnl Here we need to build shared object files, regardless whether the user
 dnl wants to the libiconv library itself to be installed shared or static or
-dnl both. Except that if $LDFLAGS specifies static linking, the creation
-dnl of shared object files would fail anyway.
-case " $LDFLAGS " in
-  *" -static "*) ;;
-  *)
-    enable_shared=yes
-    enable_static=no
-    ;;
-esac
+dnl both.
+enable_shared=yes
+enable_static=no
 LT_INIT([win32-dll])
 gl_VISIBILITY
 
 dnl           check whether OS supports plug libraries
 
-if test "$enable_shared" = yes; then
-  case "$host_os" in
-    linux* | solaris* | osf*)
-      PLUGLIB="preloadable_libiconv.so" ;;
-    *)
-      PLUGLIB=""
-  esac
-else
-  # If libtool is not configured for building shared libraries,
-  # the build rule for preloadable_libiconv.so would fail.
-  PLUGLIB=""
-fi
+case "$host_os" in
+  linux* | solaris* | osf*)
+    PLUGLIB="preloadable_libiconv.so" ;;
+  *)
+    PLUGLIB=""
+esac
 AC_SUBST([PLUGLIB])
 
 AC_CONFIG_FILES([Makefile])

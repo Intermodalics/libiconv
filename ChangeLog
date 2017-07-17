@@ -1,33 +1,3 @@
-2017-07-15  Bruno Haible  <bruno@clisp.org>
-
-	Allow building statically linked binaries, through LDFLAGS="-static".
-	Apply patch from
-	<https://lists.gnu.org/archive/html/bug-libtool/2017-07/msg00000.html>.
-	* build-aux/ltmain.sh (func_mode_help, func_mode_link): In the link
-	mode, accept option '-static-uninstalled-libs' in place of '-static',
-	and make '-static' an equivalent of '-all-static'.
-
-2017-07-15  Bruno Haible  <bruno@clisp.org>
-
-	Don't attempt to build preloadable_libiconv.so when linking statically.
-	* preload/configure.ac (enable_shared, enable_static): Don't force
-	shared libraries when LDFLAGS indicates static linking.
-	(PLUGLIB): Set to empty when is not configured for building shared
-	libraries.
-
-2017-07-15  Bruno Haible  <bruno@clisp.org>
-
-	Get rid of autom4te.cache directories, as far as possible.
-	* Makefile.devel (srclib/Makefile.in, aclocal.m4, configure,
-	config.h.in): Remove autom4te.cache after invoking aclocal, autoconf,
-	autoheader, automake.
-	* preload/Makefile.devel (aclocal, configure): Likewise.
-
-2017-05-18  Bruno Haible  <bruno@clisp.org>
-
-	* lib/relocatable.h: Update from gnulib.
-	* lib/relocatable.c: Update from gnulib.
-
 2017-01-30  Bruno Haible  <bruno@clisp.org>
 
 	Prepare for version 1.15.

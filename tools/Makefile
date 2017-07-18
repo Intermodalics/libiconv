@@ -66,8 +66,6 @@ ALL = \
  jisx0208.h \
  jisx0212.h \
  cp932ext.h \
- cp50221_0208_ext.h \
- cp50221_0212_ext.h \
  gb2312.h \
  isoir165ext.h \
  gb12345ext.h \
@@ -92,7 +90,6 @@ ALL = \
  hkscs1999.h \
  hkscs2001.h \
  hkscs2004.h \
- hkscs2008.h \
  ksc5601.h \
  uhc_1.h \
  uhc_2.h \
@@ -330,12 +327,6 @@ jisx0212.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/JIS/JIS0212.TXT cjk_tab_
 cp932ext.h : $(TABLESDIR)/unicode.org-mappings/VENDORS/MICSFT/WINDOWS/CP932.TXT cjk_tab_to_h
 	(echo '#' ; grep '^0x\(87\|E[D-F]\|F[0-9A-F]\)[0-9A-F][0-9A-F]' < $< ) | ./cjk_tab_to_h 'CP932 extensions' cp932ext > $@
 
-cp50221_0208_ext.h : CP50221-0208-EXT.TXT 8bit_tab_to_h
-	./8bit_tab_to_h 'CP50221 JISX0208 extensions' cp50221_0208_ext < $<
-
-cp50221_0212_ext.h : CP50221-0212-EXT.TXT 8bit_tab_to_h
-	./8bit_tab_to_h 'CP50221 JISX0212 extensions' cp50221_0212_ext < $<
-
 gb2312.h : $(TABLESDIR)/unicode.org-mappings/EASTASIA/GB/GB2312.TXT cjk_tab_to_h
 	./cjk_tab_to_h GB2312.1980-0 gb2312 < $< > $@
 
@@ -416,9 +407,6 @@ hkscs2001.h : $(TABLESDIR)/big5hkscs/HKSCS-2001_2006-DELTA.TXT cjk_tab_to_h
 
 hkscs2004.h : $(TABLESDIR)/big5hkscs/HKSCS-2004_2006-DELTA.TXT cjk_tab_to_h
 	(echo '#' ; grep -v , $<) | ./cjk_tab_to_h HKSCS:2004 hkscs2004 > $@
-
-hkscs2008.h : $(TABLESDIR)/big5hkscs/HKSCS-2008_2010-DELTA.TXT cjk_tab_to_h
-	(echo '#' ; grep -v , $<) | ./cjk_tab_to_h HKSCS:2008 hkscs2008 > $@
 
 # We use a modified KSC 5601 = KSX 1001 table. Jungshik Shin <jshin@mailaps.org>
 # reports that Prof. GIM Geongseog (KIM Keyongseok) <gimgs@asadal.cs.pusan.ac.kr>

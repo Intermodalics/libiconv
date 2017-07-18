@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008, 2011, 2016 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2008 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -14,20 +14,16 @@
  *
  * You should have received a copy of the GNU Library General Public
  * License along with the GNU LIBICONV Library; see the file COPYING.LIB.
- * If not, see <http://www.gnu.org/licenses/>.
+ * If not, write to the Free Software Foundation, Inc., 51 Franklin Street,
+ * Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-#include <iconv.h>
+#include <include/iconv.h>
 
-#include <limits.h>
 #include <stdlib.h>
 #include <string.h>
 #include "config.h"
 #include "localcharset.h"
-
-#ifdef __CYGWIN__
-#include <cygwin/version.h>
-#endif
 
 #if ENABLE_EXTRA
 /*
@@ -178,12 +174,8 @@ static const struct alias sysdep_aliases[] = {
 };
 #ifdef __GNUC__
 __inline
-#else
-#ifdef __cplusplus
-inline
 #endif
-#endif
-static const struct alias *
+const struct alias *
 aliases2_lookup (register const char *str)
 {
   const struct alias * ptr;
@@ -557,22 +549,8 @@ const char * iconv_canonicalize (const char * name)
     }
     if (ap->encoding_index == ei_local_wchar_t) {
       /* On systems which define __STDC_ISO_10646__, wchar_t is Unicode.
-         This is also the case on native Woe32 systems and Cygwin >= 1.7, where
-         we know that it is UTF-16.  */
-#if ((defined _WIN32 || defined __WIN32__) && !defined __CYGWIN__) || (defined __CYGWIN__ && CYGWIN_VERSION_DLL_MAJOR >= 1007)
-      if (sizeof(wchar_t) == 4) {
-        index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-# if WORDS_LITTLEENDIAN
-        index = ei_utf16le;
-# else
-        index = ei_utf16be;
-# endif
-        break;
-      }
-#elif __STDC_ISO_10646__
+         This is also the case on native Woe32 systems.  */
+#if __STDC_ISO_10646__ || ((defined _WIN32 || defined __WIN32__) && !defined __CYGWIN__)
       if (sizeof(wchar_t) == 4) {
         index = ei_ucs4internal;
         break;

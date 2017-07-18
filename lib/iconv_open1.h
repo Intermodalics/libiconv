@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2008, 2011 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2008 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -14,7 +14,8 @@
  *
  * You should have received a copy of the GNU Library General Public
  * License along with the GNU LIBICONV Library; see the file COPYING.LIB.
- * If not, see <http://www.gnu.org/licenses/>.
+ * If not, write to the Free Software Foundation, Inc., 51 Franklin Street,
+ * Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 /* Part 1 of iconv_open.
@@ -96,22 +97,8 @@
     }
     if (ap->encoding_index == ei_local_wchar_t) {
       /* On systems which define __STDC_ISO_10646__, wchar_t is Unicode.
-         This is also the case on native Woe32 systems and Cygwin >= 1.7, where
-         we know that it is UTF-16.  */
-#if ((defined _WIN32 || defined __WIN32__) && !defined __CYGWIN__) || (defined __CYGWIN__ && CYGWIN_VERSION_DLL_MAJOR >= 1007)
-      if (sizeof(wchar_t) == 4) {
-        to_index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-# if WORDS_LITTLEENDIAN
-        to_index = ei_utf16le;
-# else
-        to_index = ei_utf16be;
-# endif
-        break;
-      }
-#elif __STDC_ISO_10646__
+         This is also the case on native Woe32 systems.  */
+#if __STDC_ISO_10646__ || ((defined _WIN32 || defined __WIN32__) && !defined __CYGWIN__)
       if (sizeof(wchar_t) == 4) {
         to_index = ei_ucs4internal;
         break;
@@ -186,22 +173,8 @@
     }
     if (ap->encoding_index == ei_local_wchar_t) {
       /* On systems which define __STDC_ISO_10646__, wchar_t is Unicode.
-         This is also the case on native Woe32 systems and Cygwin >= 1.7, where
-         we know that it is UTF-16.  */
-#if ((defined _WIN32 || defined __WIN32__) && !defined __CYGWIN__) || (defined __CYGWIN__ && CYGWIN_VERSION_DLL_MAJOR >= 1007)
-      if (sizeof(wchar_t) == 4) {
-        from_index = ei_ucs4internal;
-        break;
-      }
-      if (sizeof(wchar_t) == 2) {
-# if WORDS_LITTLEENDIAN
-        from_index = ei_utf16le;
-# else
-        from_index = ei_utf16be;
-# endif
-        break;
-      }
-#elif __STDC_ISO_10646__
+         This is also the case on native Woe32 systems.  */
+#if __STDC_ISO_10646__ || ((defined _WIN32 || defined __WIN32__) && !defined __CYGWIN__)
       if (sizeof(wchar_t) == 4) {
         from_index = ei_ucs4internal;
         break;

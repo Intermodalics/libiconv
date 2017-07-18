@@ -7,14 +7,13 @@ LOCAL_CFLAGS    := \
     -DLIBDIR="\"c\"" \
     -DBUILDING_LIBICONV \
     -DIN_LIBRARY
-LOCAL_C_INCLUDES := \
-    ../libiconv \
-    ../libiconv/include \
-    ../libiconv/lib \
-    ../libiconv/libcharset/include
-LOCAL_SRC_FILES := \
-    ../libiconv/lib/iconv.c \
-    ../libiconv/lib/relocatable.c \
-    ../libiconv/libcharset/lib/localcharset.c
+LOCAL_C_INCLUDES :=$(LOCAL_PATH)
+LOCAL_C_INCLUDES +=$(LOCAL_PATH)/include
+LOCAL_C_INCLUDES +=$(LOCAL_PATH)/lib
+LOCAL_C_INCLUDES +=$(LOCAL_PATH)/libcharset/include
+
+LOCAL_SRC_FILES := $(LOCAL_PATH)/lib/iconv.c
+LOCAL_SRC_FILES += $(LOCAL_PATH)/lib/relocatable.c
+LOCAL_SRC_FILES += $(LOCAL_PATH)/libcharset/lib/localcharset.c
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
-include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_STATIC_LIBRARY)

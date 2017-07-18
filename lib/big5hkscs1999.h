@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2002, 2006, 2016 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2002, 2006 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -14,7 +14,8 @@
  *
  * You should have received a copy of the GNU Library General Public
  * License along with the GNU LIBICONV Library; see the file COPYING.LIB.
- * If not, see <http://www.gnu.org/licenses/>.
+ * If not, write to the Free Software Foundation, Inc., 51 Franklin Street,
+ * Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 /*
@@ -46,7 +47,7 @@
 #include "flushwc.h"
 
 static int
-big5hkscs1999_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+big5hkscs1999_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   ucs4_t last_wc = conv->istate;
   if (last_wc) {
@@ -103,7 +104,7 @@ big5hkscs1999_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n
 #define big5hkscs1999_flushwc normal_flushwc
 
 static int
-big5hkscs1999_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+big5hkscs1999_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   int count = 0;
   unsigned char last = conv->ostate;
@@ -180,7 +181,7 @@ big5hkscs1999_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
 }
 
 static int
-big5hkscs1999_reset (conv_t conv, unsigned char *r, size_t n)
+big5hkscs1999_reset (conv_t conv, unsigned char *r, int n)
 {
   unsigned char last = conv->ostate;
 

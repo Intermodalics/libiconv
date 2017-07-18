@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2002, 2016 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2002 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -14,7 +14,8 @@
  *
  * You should have received a copy of the GNU Library General Public
  * License along with the GNU LIBICONV Library; see the file COPYING.LIB.
- * If not, see <http://www.gnu.org/licenses/>.
+ * If not, write to the Free Software Foundation, Inc., 51 Franklin Street,
+ * Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 /*
@@ -49,7 +50,7 @@ static const unsigned short cp1131_2uni[128] = {
 };
 
 static int
-cp1131_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+cp1131_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   unsigned char c = *s;
   if (c < 0x80)
@@ -108,7 +109,7 @@ static const unsigned char cp1131_page25[152] = {
 };
 
 static int
-cp1131_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+cp1131_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   unsigned char c = 0;
   if (wc < 0x0080) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2000, 2016 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2000 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -14,7 +14,8 @@
  *
  * You should have received a copy of the GNU Library General Public
  * License along with the GNU LIBICONV Library; see the file COPYING.LIB.
- * If not, see <http://www.gnu.org/licenses/>.
+ * If not, write to the Free Software Foundation, Inc., 51 Franklin Street,
+ * Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 /*
@@ -22,7 +23,7 @@
  */
 
 static int
-ucs4swapped_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+ucs4swapped_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   /* This function assumes that 'unsigned int' has exactly 32 bits. */
   if (sizeof(unsigned int) != 4) abort();
@@ -37,7 +38,7 @@ ucs4swapped_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 }
 
 static int
-ucs4swapped_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+ucs4swapped_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   /* This function assumes that 'unsigned int' has exactly 32 bits. */
   if (sizeof(unsigned int) != 4) abort();

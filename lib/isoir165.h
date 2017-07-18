@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 1999-2001, 2005, 2012, 2016 Free Software Foundation, Inc.
+ * Copyright (C) 1999-2001, 2005 Free Software Foundation, Inc.
  * This file is part of the GNU LIBICONV Library.
  *
  * The GNU LIBICONV Library is free software; you can redistribute it
@@ -14,7 +14,8 @@
  *
  * You should have received a copy of the GNU Library General Public
  * License along with the GNU LIBICONV Library; see the file COPYING.LIB.
- * If not, see <http://www.gnu.org/licenses/>.
+ * If not, write to the Free Software Foundation, Inc., 51 Franklin Street,
+ * Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
 /*
@@ -80,7 +81,7 @@
 #include "isoir165ext.h"
 
 static int
-isoir165_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
+isoir165_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, int n)
 {
   int ret;
 
@@ -107,7 +108,7 @@ isoir165_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
     if (n >= 2) {
       unsigned char c2 = s[1];
       if (c2 >= 0x21 && c2 < 0x7f) {
-        ret = iso646_cn_mbtowc(conv,pwc,s+1,1);
+        int ret = iso646_cn_mbtowc(conv,pwc,s+1,1);
         if (ret != 1) abort();
         return 2;
       }
@@ -121,7 +122,7 @@ isoir165_mbtowc (conv_t conv, ucs4_t *pwc, const unsigned char *s, size_t n)
 }
 
 static int
-isoir165_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, size_t n)
+isoir165_wctomb (conv_t conv, unsigned char *r, ucs4_t wc, int n)
 {
   unsigned char buf[2];
   int ret;
